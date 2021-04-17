@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk6.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk4.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk5.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk3.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk2.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/Monster.cs" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 99.2408, 181.672 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 112.665, 192.444 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"Enemy",
+]]
+scale = Vector2( 0.25, 0.25 )
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -11.4246, 8.61526 )
+shape = SubResource( 1 )
+
+[node name="Animation" type="AnimatedSprite" parent="." groups=[
+"Enemy",
+]]
+frames = SubResource( 2 )
+animation = "Walk"
+frame = 5
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -12.2704, 11.3265 )
+shape = SubResource( 3 )
+[connection signal="body_entered" from="Area2D" to="." method="OnZombieEntered"]
