@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Movement.cs" type="Script" id=1]
+[ext_resource path="res://Scripts/Characters/Character.cs" type="Script" id=1]
 [ext_resource path="res://Sprites/wizard.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Orbs/WaterOrb.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/SphereManager.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22.3122, 33.041 )
@@ -22,8 +24,8 @@ tracks/0/keys = {
 "values": [ 4, 17, 18, 4 ]
 }
 
-[node name="Invoker" type="KinematicBody2D"]
-position = Vector2( -298.486, -15 )
+[node name="Movement" type="KinematicBody2D"]
+position = Vector2( -298.241, -15 )
 script = ExtResource( 1 )
 
 [node name="CircleShape2D" type="CollisionShape2D" parent="."]
@@ -31,7 +33,7 @@ position = Vector2( 3.81779, -1.22925 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.629959, -12.5992 )
+position = Vector2( 1.52187, -17.6533 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 8
@@ -39,3 +41,7 @@ frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
+
+[node name="SphereManager" type="Node2D" parent="."]
+script = ExtResource( 4 )
+sphere = ExtResource( 3 )

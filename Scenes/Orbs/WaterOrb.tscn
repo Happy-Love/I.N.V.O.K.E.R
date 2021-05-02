@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Partials/random_selection.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Orbs/WaterOrb.cs" type="Script" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -23,15 +24,16 @@ linear_accel_random = 0.79
 angle = 360.0
 angle_random = 1.0
 scale_curve = SubResource( 3 )
-color = Color( 0.756863, 0.619608, 0.619608, 0.733333 )
+color = Color( 0.113725, 0.313726, 0.592157, 0.733333 )
 
-[node name="Orb" type="Node2D"]
-position = Vector2( -31.375, 4.50977 )
+[node name="WaterOrb" type="Node2D"]
+position = Vector2( -248.59, -144.172 )
 scale = Vector2( 0.01, 0.01 )
+script = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 1 )
-position = Vector2( 28.0625, 0 )
+rotation = -0.0837758
 amount = 400
 visibility_rect = Rect2( -25, -25, 50, 50 )
 process_material = SubResource( 4 )
