@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Partials/random_selection.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Orbs/EarthOrb.cs" type="Script" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.0955882, 1 ), -0.772728, 0.0, 0, 0, Vector2( 0.966912, 0 ), 0.0, 0.346182, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+width = 2148
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+spread = 43.75
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 100.0
+orbit_velocity = -402.78
+orbit_velocity_random = 0.44
+linear_accel_random = 0.79
+angle = 360.0
+angle_random = 1.0
+scale_curve = SubResource( 3 )
+color = Color( 0.113725, 0.592157, 0.254902, 0.733333 )
+
+[node name="EarthOrb" type="Node2D"]
+position = Vector2( -248.59, -144.172 )
+scale = Vector2( 0.01, 0.01 )
+script = ExtResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 1 )
+rotation = -0.0837758
+amount = 400
+visibility_rect = Rect2( -25, -25, 50, 50 )
+process_material = SubResource( 4 )
+texture = ExtResource( 1 )

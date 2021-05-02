@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Characters/Character.cs" type="Script" id=1]
 [ext_resource path="res://Sprites/wizard.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Orbs/WaterOrb.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/SphereManager.cs" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -44,4 +43,3 @@ anims/Idle = SubResource( 2 )
 
 [node name="SphereManager" type="Node2D" parent="."]
 script = ExtResource( 4 )
-sphere = ExtResource( 3 )

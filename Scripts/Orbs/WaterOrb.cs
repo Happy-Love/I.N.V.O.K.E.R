@@ -11,9 +11,11 @@ namespace Scripts.Orbs
         }
 
 
-        public WaterOrb(string type, Particles2D particle) : base(type, particle)
+        public WaterOrb(Particles2D particle) : base(particle)
         {
 
         }
+
+        public override string Type => "Water";
     }
 }
