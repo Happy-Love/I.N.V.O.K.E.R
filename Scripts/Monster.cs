@@ -1,18 +1,32 @@
 using Godot;
+using Scripts;
 using System;
 
 public class Monster : KinematicBody2D
 {
-    private float moveSpeed = 600f;
+    [Signal] delegate void TakeDamage(int dmg);
+    private float moveSpeed = -600f * 0.1f;
     private float gravity = 20f;
     private Vector2 movement;
     public bool moveLeft;
     private float min_X = -450, max_X = 1600f;
 
+    [Export] private int _health { get; set; }
+    public int Health { get => _health; set => _health = value; }
+    public int maxHealth { get; private set; }
+
+    private TextureProgress HealthBar = new TextureProgress();
+    private SkillManager skillManager = new SkillManager();
     public override void _Ready()
     {
-        moveSpeed *= -1f;
-        GetNode<AnimatedSprite>("Animation").FlipH=true;
+        GetNode<AnimatedSprite>("Animation").FlipH = true;
+        skillManager = GetNodeOrNull<SkillManager>("/root/Core/Game/Movement/SkillManager");
+        skillManager.stats = GetNodeOrNull<Stats>("/root/Core/Game/Movement/SkillManager/Stats");
+        HealthBar = GetNodeOrNull<TextureProgress>("HealthBar");
+        HealthBar.MaxValue = Health;
+        HealthBar.Value = Health;
+        HealthBar.MinValue = 0;
+        this.Connect("TakeDamage", this, "on_take_damage");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -26,12 +40,22 @@ public class Monster : KinematicBody2D
 
     }
 
-    public void OnZombieEntered(PhysicsBody2D body)
+    public void Attack()
     {
-        if(!body.IsInGroup("Tower"))
-            return;
-        GD.Print("Noob");
-
         QueueFree();
+    }
+
+    public void on_take_damage(int dmg)
+    {
+        Health -= dmg;
+        HealthBar.Value = Health;
+
+        if (Health <= 0)
+        {
+            skillManager.stats.ManaApply(2);
+            skillManager.stats.GetMoney(2);
+            skillManager.stats.GetScores(2);
+            QueueFree();
+        }
     }
 }

@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Collectables/coin.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/ZenDots-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 2 )
+
+[node name="CoinsContainer" type="NinePatchRect"]
+anchor_right = 0.113
+anchor_bottom = 0.047
+margin_top = -0.176777
+margin_right = 0.0399933
+margin_bottom = 0.063221
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coins" type="Label" parent="."]
+anchor_right = 0.567
+anchor_bottom = 1.103
+margin_left = 0.44545
+margin_top = 1.0
+margin_right = 0.406448
+margin_bottom = -0.252998
+custom_fonts/font = SubResource( 1 )
+text = "10000"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.564
+anchor_top = 0.088
+anchor_right = 0.858
+anchor_bottom = 1.128
+margin_left = 0.0507813
+margin_top = 0.0221548
+margin_right = 1209.25
+margin_bottom = 1271.98
+rect_scale = Vector2( 0.05, 0.04 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

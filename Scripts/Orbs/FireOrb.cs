@@ -13,6 +13,13 @@ namespace Scripts.Orbs
         {
         }
 
-        public override string Type => "Fire";
+        public override string Type => "E";
+
+        public override float Regen => 0.2f;
+
+        public override void getEffect(Stats stats)
+        {
+            
+        }
     }
 }

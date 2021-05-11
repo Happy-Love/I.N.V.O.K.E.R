@@ -13,6 +13,13 @@ namespace Scripts.Orbs
         {
         }
 
-        public override string Type => "Earth"; 
+        public override string Type => "W";
+
+        public override float Regen => 0.5f;
+
+        public override void getEffect(Stats stats)
+        {
+            stats.GetHealth(Regen);
+        }
     }
 }

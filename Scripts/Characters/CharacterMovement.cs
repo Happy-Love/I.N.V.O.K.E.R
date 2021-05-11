@@ -1,4 +1,5 @@
 using Godot;
+using Scripts;
 
 public class CharacterMovement
 {
@@ -11,7 +12,7 @@ public class CharacterMovement
     public bool slope_slide_threshold = true;
     public Vector2 velocity = new Vector2();
 
-    public void Move(float delta, KinematicBody2D body)
+    public void Move(float delta, Character body)
     {
         var current_speed = Input.IsActionPressed("ui_run") && body.IsOnFloor() ? move_speed * running_boost : move_speed;
         var direction_x = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
@@ -28,7 +29,19 @@ public class CharacterMovement
 
         var snap_vector = snap ? new Vector2(0, 32) : new Vector2();
         velocity = body.MoveAndSlideWithSnap(velocity, snap_vector, Vector2.Up, slope_slide_threshold, 4, Mathf.Deg2Rad(46));
-
+        var sprite = body.GetNodeOrNull<Sprite>("Sprite");
+        var skillManager = body.GetNodeOrNull<SkillManager>("SkillManager");
+        // body.StateMachine.Get
+        if (Input.IsActionPressed("ui_left"))
+        {
+            sprite.FlipH = true;
+            skillManager.direction = -1;
+        }
+        else if (Input.IsActionPressed("ui_right"))
+        {
+            sprite.FlipH = false;
+            skillManager.direction = 1;
+        }
         if (IsJustLanded(body))
         {
             snap = true;

@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk3.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Enemies/Zombie/Idle/Walk2.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Monster.cs" type="Script" id=7]
+[ext_resource path="res://Scenes/Bars/HealthBar.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 99.2408, 181.672 )
@@ -19,14 +20,14 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 112.665, 192.444 )
-
 [node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "Enemy",
 ]]
 scale = Vector2( 0.25, 0.25 )
+collision_layer = 4
+collision_mask = 0
 script = ExtResource( 7 )
+_health = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -11.4246, 8.61526 )
@@ -37,12 +38,15 @@ shape = SubResource( 1 )
 ]]
 frames = SubResource( 2 )
 animation = "Walk"
-frame = 5
 playing = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HealthBar" parent="." instance=ExtResource( 8 )]
+margin_left = -208.295
+margin_top = -242.191
+margin_right = 200.705
+margin_bottom = -202.191
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -12.2704, 11.3265 )
-shape = SubResource( 3 )
-[connection signal="body_entered" from="Area2D" to="." method="OnZombieEntered"]
+[node name="LifeLabel" parent="HealthBar" index="0"]
+text = ""
+
+[editable path="HealthBar"]

@@ -12,19 +12,19 @@ public class SphereManager : Node2D
 
     private Vector2 spawnPoint = new Vector2()
     {
-        x = -10,
+        x = -60,
         y = 0,
     };
 
-    List<Orb> orbs = new List<Orb>();
+    public List<Orb> Orbs { get; private set; } = new List<Orb>();
 
 
     // need strong refactoring (incapsulation with switch or visitor)
     public void SpawnSphere()
     {
-        if (orbs.Count > 3)
+        if (Orbs.Count > 3)
         {
-            orbs.RemoveAt(0);
+            Orbs.RemoveAt(0);
             var Child = GetChild(0);
             Child.QueueFree();
         }
@@ -35,11 +35,11 @@ public class SphereManager : Node2D
             Orb orb = waterOrb.Instance() as WaterOrb;
             orb.Position = spawnPoint;
             AddChild(orb);
-            orbs.Add(orb);
+            Orbs.Add(orb);
             int i = 0;
             foreach (Node2D item in GetChildren())
             {
-                item.Position = spawnPoint.Rotated((i*45f) + (200f));
+                item.Position = spawnPoint.Rotated((i * 45f) + (200f));
                 i++;
             }
         }
@@ -49,11 +49,11 @@ public class SphereManager : Node2D
             Orb orb = earthOrb.Instance() as EarthOrb;
             orb.Position = spawnPoint;
             AddChild(orb);
-            orbs.Add(orb);
+            Orbs.Add(orb);
             int i = 0;
             foreach (Node2D item in GetChildren())
             {
-                item.Position = spawnPoint.Rotated((i*45f) + (200f));
+                item.Position = spawnPoint.Rotated((i * 45f) + (200f));
                 i++;
             }
         }
@@ -63,23 +63,27 @@ public class SphereManager : Node2D
             Orb orb = fireOrb.Instance() as FireOrb;
             orb.Position = spawnPoint;
             AddChild(orb);
-            orbs.Add(orb);
+            Orbs.Add(orb);
             int i = 0;
             foreach (Node2D item in GetChildren())
             {
-                item.Position = spawnPoint.Rotated((i*45f) + (200f));
+                item.Position = spawnPoint.Rotated((i * 45f) + (200f));
                 i++;
             }
         }
-
-        // q-> regenerate list and nodes
     }
 
     public void RotateSpheres(float delta)
     {
-        foreach (var orb in orbs)
+        foreach (var orb in Orbs)
         {
             orb.Spin(delta);
         }
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        RotateSpheres(delta);
+        SpawnSphere();
     }
 }

@@ -3,27 +3,34 @@ using System;
 
 public class Tower : StaticBody2D
 {
-    [Export]
-    private float maxHealth = 50f;
-    
-    [Export]
-    private float currentHealth = 0f;
-
-
+    public Stats stats = new Stats();
+    private Label gameLocalScoreLabel;
+    private Label gameOverMenuScoreLabel;
     public override void _Ready()
     {
-        currentHealth = maxHealth;
+        stats = GetNodeOrNull<Stats>("/root/Core/Game/Movement/SkillManager/Stats");
+        gameLocalScoreLabel = GetNodeOrNull<Label>("/root/Core/Game/UI/ScoresContainer/Scores");
+        gameOverMenuScoreLabel = GetNodeOrNull<Label>("/root/Core/GameOverMenu/HGameOverContainer/VGameOverContainer/VLabelsContainer/Scores");
     }
+
     void OnTowerEntered(PhysicsBody2D body)
     {
-        if(!body.IsInGroup("Enemy"))
+        if (!body.IsInGroup("Enemy"))
             return;
 
-        currentHealth -= 10;
-        GetNode<TextureProgress>("/root/Core/Game/UI/VBoxContainer/HealthBar").Value = currentHealth;
+        stats.TakeHealth(1);
 
-        if(currentHealth <= 0)
+        body.QueueFree();
+
+        if (stats.Health <= 0)
         {
+            gameOverMenuScoreLabel.Text = gameLocalScoreLabel.Text;
+
+            GetNode<Game>("/root/Core/Game").Visible = false;
+            GetNode<Game>("/root/Core/Game").SetProcess(false);
+            
+            GetNode<Control>("/root/Core/GameOverMenu").Visible = true;
+
             QueueFree();
         }
     }

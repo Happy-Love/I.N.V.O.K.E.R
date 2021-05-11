@@ -24,7 +24,6 @@ __meta__ = {
 margin_right = 409.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( -352.945, -211.513 )
-max_value = 100.0
 value = 100.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 1 )

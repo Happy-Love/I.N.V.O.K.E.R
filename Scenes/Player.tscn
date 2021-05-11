@@ -7,6 +7,8 @@
 
 [node name="Movement" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
+collision_layer = 4
+collision_mask = 2147483660
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 3 )

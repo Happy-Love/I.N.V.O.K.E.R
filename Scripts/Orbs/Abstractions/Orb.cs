@@ -4,6 +4,7 @@ namespace Scripts.Abstractions.Orbs
 {
     public abstract class Orb : Node2D
     {
+        public abstract float Regen { get; }
         public abstract string Type { get; }
         public Particles2D Particle;
         Vector2 point = new Vector2(0, 0);
@@ -20,7 +21,8 @@ namespace Scripts.Abstractions.Orbs
 
         public void Spin(float delta)
         {
-            Position = point + (Position - point).Rotated(45f * delta * 0.01f);
+            Position = point + (Position - point).Rotated(45f * delta * 0.1f);
         }
-    }
+        public abstract void getEffect(Stats stats);
+}
 }
