@@ -115,4 +115,5 @@ size_flags_horizontal = 7
 size_flags_vertical = 6
 custom_fonts/font = SubResource( 2 )
 text = "Exit"
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Start" to="." method="OnStartPressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/Exit" to="." method="OnExitPressed"]

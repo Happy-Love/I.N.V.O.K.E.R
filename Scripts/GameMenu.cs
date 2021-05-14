@@ -1,11 +1,8 @@
 using Godot;
-using Scripts;
 
 public class GameMenu : Node
 {
     private PackedScene mainMenuScene = ResourceLoader.Load("res://Scenes/GUI.tscn") as PackedScene;
-    private bool isPause = false;
-
     public void OnExitPressed()
     {
         GetTree().Quit();

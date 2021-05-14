@@ -1,9 +1,8 @@
 using Godot;
-using System;
 
 public class StartMenu : MarginContainer
 {
-    private PackedScene mainMenuScene = ResourceLoader.Load("res://Scenes/GUI.tscn") as PackedScene;
+    private PackedScene mainMenuScene = ResourceLoader.Load("res://Scenes/Main.tscn") as PackedScene;
 
     public override void _Ready()
     {
@@ -16,6 +15,6 @@ public class StartMenu : MarginContainer
     }
     public void OnStartPressed()
     {
-        GetTree().ChangeSceneTo("")
+        GetTree().ChangeSceneTo(mainMenuScene);
     }
 }

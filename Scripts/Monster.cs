@@ -1,15 +1,12 @@
 using Godot;
 using Scripts;
-using System;
 
 public class Monster : KinematicBody2D
 {
     [Signal] delegate void TakeDamage(int dmg);
     private float moveSpeed = -600f * 0.1f;
-    private float gravity = 20f;
     private Vector2 movement;
     public bool moveLeft;
-    private float min_X = -450, max_X = 1600f;
 
     [Export] private int _health { get; set; }
     public int Health { get => _health; set => _health = value; }
